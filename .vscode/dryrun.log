@@ -1,6 +1,0 @@
-make all --dry-run --keep-going --print-directory
-make: Entering directory '/home/kali/Lot3'
-make: Leaving directory '/home/kali/Lot3'
- 
-make: *** No rule to make target 'all'.
-
