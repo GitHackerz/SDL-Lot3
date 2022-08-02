@@ -1,0 +1,2 @@
+./assets/images/TextRiddle/EnigmeText1.jpg 17-Dec-2010 14-Jan-2011 1-Jan-2011 1 (152,500) (1295,500) (760,874)
+./assets/images/TextRiddle/EnigmeText2.jpg 24 20 23 1 (293,500) (1426, 500) (875,875)

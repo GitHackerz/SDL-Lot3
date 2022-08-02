@@ -1,0 +1,18 @@
+{
+  "files.associations": {
+    "*.js": "javascript",
+    "main_fn.h": "c",
+    "sdl.h": "c",
+    "textimage.h": "c",
+    "stdlib.h": "c",
+    "stdbool.h": "c"
+  },
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "/home/kali/Lot3",
+      "binaryPath": "/home/kali/Lot3/game",
+      "binaryArgs": []
+    }
+  ],
+  "C_Cpp.errorSquiggles": "Disabled"
+}
