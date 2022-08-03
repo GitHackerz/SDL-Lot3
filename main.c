@@ -6,6 +6,8 @@
 
 #include "TextImage.h"
 #include "RiddleText.h"
+#include "RiddleImage.h"
+#include "MainFN.h"
 
 // Global Variables
 SDL_Surface *screen;
@@ -134,8 +136,9 @@ int main()
 
             break;
         case SDL_MOUSEBUTTONDOWN:
-            if (insideButton[0])
-                choice = 1;
+            for (int i = 0; i < 3; i++)
+                if (insideButton[i])
+                    choice = i + 1;
             break;
         case SDL_KEYDOWN:
             switch (event.key.keysym.sym)
@@ -167,15 +170,21 @@ int main()
 
         if (choice != 0)
         {
-            if (choice == 1)
+            switch (choice)
             {
+            case 1:
                 isRunning = RiddleTextLoop(screen, &fullScreen);
-                choice = 0;
-                displayImage(menuBackg, screen);
-                for (int i = 0; i < 3; i++)
-                    displayImage(butClick[i], screen);
-                SDL_Flip(screen);
+                break;
+            case 2:
+                isRunning = RiddleImageLoop(screen, &fullScreen);
+                break;
             }
+
+            choice = 0;
+            displayImage(menuBackg, screen);
+            for (int i = 0; i < 3; i++)
+                displayImage(butClick[i], screen);
+            SDL_Flip(screen);
         }
     }
 

@@ -1,0 +1,7 @@
+{
+  "makefile.extensionOutputFolder": "./.vscode",
+  "files.associations": {
+    "*.js": "javascript",
+    "sdl.h": "c"
+  }
+}

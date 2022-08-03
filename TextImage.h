@@ -1,9 +1,6 @@
 #ifndef TextImage
 #define TextImage
 
-#define Width 1920
-#define Height 1080
-
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>

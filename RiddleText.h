@@ -3,6 +3,7 @@
 
 #include "TextImage.h"
 #include <stdbool.h>
+#include "MainFN.h"
 
 typedef struct RiddleText
 {

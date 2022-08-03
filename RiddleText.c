@@ -110,6 +110,10 @@ bool RiddleTextLoop(SDL_Surface *screen, bool *fullScreen)
                 break;
             case SDLK_f:
                 *fullScreen = !*fullScreen;
+                if (*fullScreen)
+                    screen = SDL_SetVideoMode(Width, Height, 32, SDL_HWSURFACE | SDL_FULLSCREEN);
+                else
+                    screen = SDL_SetVideoMode(Width, Height, 32, SDL_HWSURFACE);
                 displayRiddleText(riddle, screen);
                 break;
             case SDLK_a:
