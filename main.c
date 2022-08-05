@@ -7,6 +7,7 @@
 #include "TextImage.h"
 #include "RiddleText.h"
 #include "RiddleImage.h"
+#include "MiniGame.h"
 #include "MainFN.h"
 
 // Global Variables
@@ -176,6 +177,9 @@ int main()
                 isRunning = RiddleTextLoop(screen, &fullScreen);
                 break;
             case 2:
+                isRunning = gameLoop(screen, &fullScreen);
+                break;
+            case 3:
                 isRunning = RiddleImageLoop(screen, &fullScreen);
                 break;
             }

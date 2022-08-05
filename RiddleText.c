@@ -1,10 +1,5 @@
 #include "RiddleText.h"
-#include <stdlib.h>
 
-int generateRandomNumber(int min, int max)
-{
-    return rand() % (max - min + 1) + min;
-}
 void generateRiddleText(RiddleText *riddle)
 {
     FILE *textRiddleFile = fopen("./Data/textRiddle.txt", "r");

@@ -1,8 +1,6 @@
 #ifndef RiddleImage_h
 #define RiddleImage_h
 
-#include "TextImage.h"
-#include <stdbool.h>
 #include "MainFN.h"
 
 typedef struct RiddleImage
@@ -13,7 +11,6 @@ typedef struct RiddleImage
     Text cityName;
 } RiddleImage;
 
-int generateRandomNumber(int min, int max);
 void generateRiddleImage(RiddleImage *riddle);
 void displayRiddleImage(RiddleImage riddle, SDL_Surface *screen);
 void freeRiddleImage(RiddleImage *riddle);

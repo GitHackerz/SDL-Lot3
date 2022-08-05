@@ -1,5 +1,4 @@
 #include "RiddleImage.h"
-#include <stdlib.h>
 
 void generateRiddleImage(RiddleImage *riddle)
 {
