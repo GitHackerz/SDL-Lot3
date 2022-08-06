@@ -1,7 +1,7 @@
 /**
  * @file MainFN.c
  * @author
- * @brief File containing main functions
+ * @brief Main File containing main functions
  * @version 0.1
  * @date 2022-08-05
  *
@@ -48,7 +48,13 @@ void displayWinGame(Image winGame[], SDL_Surface *screen)
         SDL_Flip(screen);
     }
 }
-
+void freeWinGame(Image winGame[] )
+{
+    for(int i=0;i<61;i++)
+    {
+        freeImage(winGame[i]);
+    }
+}
 /**
  * @brief Init Loose Game Images
  * @param looseGame
@@ -74,5 +80,13 @@ void displayLooseGame(Image looseGame[], SDL_Surface *screen)
     {
         displayImage(looseGame[i], screen);
         SDL_Flip(screen);
+    }
+}
+
+void freeLooseGame(Image looseGame[] )
+{
+    for(int i=0;i<58;i++)
+    {
+        freeImage(looseGame[i]);
     }
 }

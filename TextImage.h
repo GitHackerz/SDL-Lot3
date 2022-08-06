@@ -27,6 +27,7 @@ typedef struct Text
     TTF_Font *font;
     char Texte[100];
 } Text;
+
 /**
  * @struct Image
  * @brief Image Structure
@@ -34,7 +35,7 @@ typedef struct Text
 typedef struct Image
 {
     SDL_Rect pos;
-    SDL_Surface *img;
+    SDL_Surface *imgSurface;
     char nameImg[100];
 } Image;
 

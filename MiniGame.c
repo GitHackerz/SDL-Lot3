@@ -522,8 +522,8 @@ bool gameLoop(SDL_Surface *screen, bool *fullScreen)
         if (!isMyTurn)
         {
             SDL_Delay(1000);
-            if (!playerWin(game) && !Attack(&game, screen))
-                if (!playerWin(game) && !Deffense(&game, screen))
+            if (!playerWin(game) && !Deffense(&game, screen))
+                if (!playerWin(game) && !Attack(&game, screen))
                     randomPlay(&game, screen);
             isMyTurn = true;
             SDL_Delay(500);
@@ -540,6 +540,8 @@ bool gameLoop(SDL_Surface *screen, bool *fullScreen)
         }
     }
     freeGame(&game);
+    freeWinGame(winGame);
+    freeLooseGame(looseGame);
     return !quitGame;
 }
 

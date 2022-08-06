@@ -18,6 +18,7 @@
  * @brief Image Riddle structure
  *
  */
+
 typedef struct RiddleImage
 {
     Image Backg;

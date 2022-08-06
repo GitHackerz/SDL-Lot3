@@ -1,6 +1,6 @@
 /**
  * @file main.c
- * @author
+ * @author Hamza 
  * @brief Main File
  * @version 0.1
  * @date 2022-08-05
@@ -9,9 +9,9 @@
  *
  */
 
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
-#include <SDL/SDL_mixer.h>
 #include <stdbool.h>
 #include <time.h>
 

@@ -21,6 +21,8 @@
 int generateRandomNumber(int min, int max);
 void initWinGame(Image winGame[]);
 void displayWinGame(Image winGame[], SDL_Surface *screen);
+void freeWinGame(Image winGame[] );
 void initLooseGame(Image looseGame[]);
 void displayLooseGame(Image looseGame[], SDL_Surface *screen);
+void freeLooseGame(Image looseGame[] );
 #endif /* mainFN_h */

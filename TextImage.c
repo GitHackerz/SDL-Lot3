@@ -62,7 +62,8 @@ void freeText(Text text)
  */
 void initBackg(Image *Backg, char nameImg[])
 {
-    Backg->img = IMG_Load(nameImg);
+    strcpy(Backg->nameImg, nameImg);
+    Backg->imgSurface = IMG_Load(Backg->nameImg);
     Backg->pos.x = 0;
     Backg->pos.y = 0;
 }
@@ -77,9 +78,8 @@ void initBackg(Image *Backg, char nameImg[])
  */
 void initImage(Image *Img, int x, int y, char nameImg[])
 {
-    Img->img = NULL;
     strcpy(Img->nameImg, nameImg);
-    Img->img = IMG_Load(nameImg);
+    Img->imgSurface = IMG_Load(Img->nameImg);
     Img->pos.x = x;
     Img->pos.y = y;
 }
@@ -91,7 +91,7 @@ void initImage(Image *Img, int x, int y, char nameImg[])
  */
 void displayImage(Image Img, SDL_Surface *screen)
 {
-    SDL_BlitSurface(Img.img, NULL, screen, &Img.pos);
+    SDL_BlitSurface(Img.imgSurface, NULL, screen, &Img.pos);
 }
 /**
  * @brief Free the Image
@@ -100,5 +100,5 @@ void displayImage(Image Img, SDL_Surface *screen)
  */
 void freeImage(Image Img)
 {
-    SDL_FreeSurface(Img.img);
+    SDL_FreeSurface(Img.imgSurface);
 }

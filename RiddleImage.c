@@ -172,5 +172,7 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
         }
     }
     freeRiddleImage(&riddle);
+    freeWinGame(winGame);
+    freeLooseGame(looseGame);
     return !quitGame;
 }
