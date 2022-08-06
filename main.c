@@ -116,8 +116,8 @@ int main()
                 int y = event.motion.y;
                 int posX = butClick[i].pos.x;
                 int posY = butClick[i].pos.y;
-                int posX1 = posX + butClick[i].img->w;
-                int posY1 = posY + butClick[i].img->h;
+                int posX1 = posX + butClick[i].imgSurface->w;
+                int posY1 = posY + butClick[i].imgSurface->h;
                 displayImage(butClick[i], screen);
                 if (x >= posX && x <= posX1 && y >= posY && y <= posY1)
                 {
