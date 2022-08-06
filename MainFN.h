@@ -1,3 +1,14 @@
+/**
+ * @file MainFN.h
+ * @author
+ * @brief Header file for MainFN
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #ifndef mainFN_h
 #define mainFN_h
 

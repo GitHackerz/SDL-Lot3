@@ -1,8 +1,23 @@
+/**
+ * @file RiddleText.h
+ * @author
+ * @brief Header file for RiddleText
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #ifndef RiddleText_h
 #define RiddleText_h
 
 #include "MainFN.h"
 
+/**
+ * @struct RiddleText
+ * @brief Text Riddle structure
+ *
+ */
 typedef struct RiddleText
 {
     Text Answer[3];

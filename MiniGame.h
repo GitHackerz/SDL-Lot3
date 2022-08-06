@@ -1,8 +1,22 @@
+/**
+ * @file MiniGame.h
+ * @author
+ * @brief Header File for MiniGame
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #ifndef MiniGame
 #define MiniGame
 
 #include "MainFN.h"
 
+/**
+ * @struct Game
+ * @brief Game structure for miniGame
+ */
 typedef struct Game
 {
     Image Backg;

@@ -1,5 +1,20 @@
+/**
+ * @file RiddleText.c
+ * @author
+ * @brief Text Riddle functions
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include "RiddleText.h"
 
+/**
+ * @brief erate a random text Riddle
+ *
+ * @param riddle
+ */
 void generateRiddleText(RiddleText *riddle)
 {
     FILE *textRiddleFile = fopen("./Data/textRiddle.txt", "r");
@@ -55,6 +70,12 @@ void generateRiddleText(RiddleText *riddle)
     } while (i < 3);
 }
 
+/**
+ * @brief Display the Riddle
+ *
+ * @param riddle
+ * @param screen
+ */
 void displayRiddleText(RiddleText riddle, SDL_Surface *screen)
 {
     displayImage(riddle.Backg, screen);
@@ -67,6 +88,11 @@ void displayRiddleText(RiddleText riddle, SDL_Surface *screen)
     SDL_Flip(screen);
 }
 
+/**
+ * @brief Free the Riddle Variables
+ *
+ * @param riddle
+ */
 void freeRiddleText(RiddleText *riddle)
 {
     freeImage(riddle->Backg);
@@ -76,15 +102,28 @@ void freeRiddleText(RiddleText *riddle)
     }
 }
 
+/**
+ * @brief Text Riddle Loop
+ *
+ * @param screen
+ * @param fullScreen
+ * @return true if he's just quit the TextRiddle
+ * @return false he Want to quit all the game
+ */
+
 bool RiddleTextLoop(SDL_Surface *screen, bool *fullScreen)
 {
     RiddleText riddle;
+    Image winGame[61];
+    Image looseGame[58];
     Text result;
     SDL_Color white = {255, 255, 255};
     SDL_Event event;
     bool isRunning = true, quitGame = false;
     int answer = 0;
 
+    initWinGame(winGame);
+    initLooseGame(looseGame);
     generateRiddleText(&riddle);
     displayRiddleText(riddle, screen);
 
@@ -120,6 +159,22 @@ bool RiddleTextLoop(SDL_Surface *screen, bool *fullScreen)
             case SDLK_c:
                 answer = 3;
                 break;
+            }
+
+            if (answer)
+            {
+                if (answer == riddle.correctAnswer)
+                {
+                    displayWinGame(winGame, screen);
+                    SDL_Delay(5000);
+                    isRunning = false;
+                }
+                else
+                {
+                    displayLooseGame(looseGame, screen);
+                    SDL_Delay(5000);
+                    isRunning = false;
+                }
             }
             break;
         }

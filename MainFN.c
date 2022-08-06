@@ -1,10 +1,31 @@
+/**
+ * @file MainFN.c
+ * @author
+ * @brief File containing main functions
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include "MainFN.h"
 
+/**
+ * @brief Generate random numbers between min and max
+ *
+ * @param min
+ * @param max
+ * @return random Number
+ */
 int generateRandomNumber(int min, int max)
 {
     return rand() % (max - min + 1) + min;
 }
 
+/**
+ * @brief Init win game images
+ * @param winGame
+ */
 void initWinGame(Image winGame[])
 {
     for (int i = 0; i < 61; i++)
@@ -14,6 +35,11 @@ void initWinGame(Image winGame[])
     }
 }
 
+/**
+ * @brief Display win game images
+ * @param winGame
+ * @param screen
+ */
 void displayWinGame(Image winGame[], SDL_Surface *screen)
 {
     for (int i = 0; i < 61; i++)
@@ -23,6 +49,10 @@ void displayWinGame(Image winGame[], SDL_Surface *screen)
     }
 }
 
+/**
+ * @brief Init Loose Game Images
+ * @param looseGame
+ */
 void initLooseGame(Image looseGame[])
 {
     for (int i = 0; i < 58; i++)
@@ -32,6 +62,12 @@ void initLooseGame(Image looseGame[])
     }
 }
 
+/**
+ * @brief display Loose Game Images
+ *
+ * @param looseGame
+ * @param screen
+ */
 void displayLooseGame(Image looseGame[], SDL_Surface *screen)
 {
     for (int i = 0; i < 58; i++)

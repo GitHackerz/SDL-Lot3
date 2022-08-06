@@ -1,3 +1,13 @@
+/**
+ * @file TextImage.h
+ * @author
+ * @brief Header File for TextImage
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #ifndef TextImage
 #define TextImage
 
@@ -5,6 +15,10 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 
+/**
+ * @struct Text
+ * @brief Text Structure
+ */
 typedef struct Text
 {
     SDL_Rect pos;
@@ -13,7 +27,10 @@ typedef struct Text
     TTF_Font *font;
     char Texte[100];
 } Text;
-
+/**
+ * @struct Image
+ * @brief Image Structure
+ */
 typedef struct Image
 {
     SDL_Rect pos;

@@ -1,5 +1,21 @@
+/**
+ * @file MiniGame.c
+ * @author
+ * @brief Mini Game Functions
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "MiniGame.h"
 
+/**
+ * @brief Initialize the mini Game (Images and Configurations...)
+ *
+ * @param game
+ */
 void initGame(Game *game)
 {
     SDL_Rect pos[3][3];
@@ -21,6 +37,17 @@ void initGame(Game *game)
     }
 }
 
+/**
+ * @brief Get the Pos object
+ *
+ * @param game The game object
+ * @param x The x position
+ * @param y The y position
+ * @param i The i position on the 2D Table
+ * @param j The j position on the 2D Table
+ * @return true if he found the pos and returned i j postition on the table
+ * @return false if not found
+ */
 bool getPos(Game game, int x, int y, int *i, int *j)
 {
     int posX = 630, posY = 241;
@@ -47,18 +74,43 @@ bool getPos(Game game, int x, int y, int *i, int *j)
     return false;
 }
 
+/**
+ * @brief Display the X on specific position (i / j)
+ *
+ * @param game game Object
+ * @param screen The screen to display
+ * @param i The i position on the 2D Table
+ * @param j The j position on the 2D Table
+ */
 void checkX(Game *game, SDL_Surface *screen, int i, int j)
 {
     game->isChecked[i][j] = 1;
     displayGame(*game, screen);
     SDL_Flip(screen);
 }
+
+/**
+ * @brief Display the O on specific position (i / j)
+ *
+ * @param game game Object
+ * @param screen The screen to display
+ * @param i The i position on the 2D Table
+ * @param j The j position on the 2D Table
+ */
 void checkO(Game *game, SDL_Surface *screen, int i, int j)
 {
     game->isChecked[i][j] = 2;
     displayGame(*game, screen);
     SDL_Flip(screen);
 }
+
+/**
+ * @brief Check if he's on the middle on vertical line by giving specific position
+ *
+ * @param i psoition I
+ * @return true
+ * @return false
+ */
 bool onMiddleV(int i)
 {
     if (i > 0 && i < 2)
@@ -66,6 +118,13 @@ bool onMiddleV(int i)
     return false;
 }
 
+/**
+ * @brief Check if he's on the middle on horizontal line by giving specific position
+ *
+ * @param j
+ * @return true
+ * @return false
+ */
 bool onMiddleH(int j)
 {
     if (j > 0 && j < 2)
@@ -73,6 +132,13 @@ bool onMiddleH(int j)
     return false;
 }
 
+/**
+ * @brief Check if he's on the top by giving specific position
+ *
+ * @param i
+ * @return true
+ * @return false
+ */
 bool onTop(int i)
 {
     if (i == 0)
@@ -80,6 +146,13 @@ bool onTop(int i)
     return false;
 }
 
+/**
+ * @brief Check if he's on the Bottom by giving specific position
+ *
+ * @param i
+ * @return true
+ * @return false
+ */
 bool onBottom(int i)
 {
     if (i == 2)
@@ -87,6 +160,13 @@ bool onBottom(int i)
     return false;
 }
 
+/**
+ * @brief Check if he's on the Left by giving specific position
+ *
+ * @param j
+ * @return true
+ * @return false
+ */
 bool onLeft(int j)
 {
     if (j == 0)
@@ -94,6 +174,13 @@ bool onLeft(int j)
     return false;
 }
 
+/**
+ * @brief Check if he's on the right by giving specific position
+ *
+ * @param j
+ * @return true
+ * @return false
+ */
 bool onRight(int j)
 {
     if (j == 2)
@@ -101,6 +188,14 @@ bool onRight(int j)
     return false;
 }
 
+/**
+ * @brief search any free position where he can play to win
+ *
+ * @param game
+ * @param screen
+ * @return true
+ * @return false
+ */
 bool Attack(Game *game, SDL_Surface *screen)
 {
     for (int i = 0; i < 3; i++)
@@ -163,6 +258,15 @@ bool Attack(Game *game, SDL_Surface *screen)
     // }
     return false;
 }
+
+/**
+ * @brief The computer Try to defend by playing on specific position to disallow the player to win
+ *
+ * @param game
+ * @param screen
+ * @return true
+ * @return false
+ */
 
 bool Deffense(Game *game, SDL_Surface *screen)
 {
@@ -285,6 +389,12 @@ bool Deffense(Game *game, SDL_Surface *screen)
     return false;
 }
 
+/**
+ * @brief Computer if he don't need to attack or to defend then he will play Randomly
+ *
+ * @param game
+ * @param screen
+ */
 void randomPlay(Game *game, SDL_Surface *screen)
 {
     int i = rand() % 3;
@@ -297,6 +407,12 @@ void randomPlay(Game *game, SDL_Surface *screen)
     checkO(game, screen, i, j);
 }
 
+/**
+ * @brief Check if the Player Win or Lose
+ *
+ * @param game
+ * @return 1 = Player Win / 2 = Computer Win
+ */
 int playerWin(Game game)
 {
     for (int i = 0; i < 3; i++)
@@ -337,6 +453,14 @@ int playerWin(Game game)
     return 0;
 }
 
+/**
+ * @brief Mini GameLoop
+ *
+ * @param screen
+ * @param fullScreen
+ * @return true if he's just quit the miniGame
+ * @return false he Want to quit all the game
+ */
 bool gameLoop(SDL_Surface *screen, bool *fullScreen)
 {
     Game game;
@@ -398,8 +522,8 @@ bool gameLoop(SDL_Surface *screen, bool *fullScreen)
         if (!isMyTurn)
         {
             SDL_Delay(1000);
-            if (!playerWin(game) && !Deffense(&game, screen))
-                if (!playerWin(game) && !Attack(&game, screen))
+            if (!playerWin(game) && !Attack(&game, screen))
+                if (!playerWin(game) && !Deffense(&game, screen))
                     randomPlay(&game, screen);
             isMyTurn = true;
             SDL_Delay(500);
@@ -419,6 +543,13 @@ bool gameLoop(SDL_Surface *screen, bool *fullScreen)
     return !quitGame;
 }
 
+/**
+ * @brief Display the MiniGame
+ *
+ * @param game
+ * @param screen
+ */
+
 void displayGame(Game game, SDL_Surface *screen)
 {
     displayImage(game.Backg, screen);
@@ -435,6 +566,11 @@ void displayGame(Game game, SDL_Surface *screen)
     SDL_Flip(screen);
 }
 
+/**
+ * @brief free the MiniGame
+ *
+ * @param game
+ */
 void freeGame(Game *game)
 {
     freeImage(game->Backg);

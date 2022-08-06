@@ -1,5 +1,20 @@
+/**
+ * @file RiddleImage.c
+ * @author
+ * @brief Image Riddle Functions
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include "RiddleImage.h"
 
+/**
+ * @brief Generate a random image Riddle
+ *
+ * @param riddle
+ */
 void generateRiddleImage(RiddleImage *riddle)
 {
     FILE *imageRiddleFile = fopen("./Data/imageRiddle.txt", "r");
@@ -48,6 +63,12 @@ void generateRiddleImage(RiddleImage *riddle)
     }
 }
 
+/**
+ * @brief Display the Riddle
+ *
+ * @param riddle
+ * @param screen
+ */
 void displayRiddleImage(RiddleImage riddle, SDL_Surface *screen)
 {
     displayImage(riddle.Backg, screen);
@@ -59,6 +80,11 @@ void displayRiddleImage(RiddleImage riddle, SDL_Surface *screen)
     SDL_Flip(screen);
 }
 
+/**
+ * @brief Free the Riddle Variables
+ *
+ * @param riddle
+ */
 void freeRiddleImage(RiddleImage *riddle)
 {
     freeImage(riddle->Backg);
@@ -68,6 +94,15 @@ void freeRiddleImage(RiddleImage *riddle)
         freeImage(riddle->Answer[i]);
 }
 
+/**
+ * @brief Image Riddle Loop
+ *
+ * @param screen
+ * @param fullScreen
+ * @return true if he's just quit the ImageRiddle
+ * @return false he Want to quit all the game
+ */
+
 bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
 {
     RiddleImage riddle;
@@ -76,7 +111,11 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
     SDL_Event event;
     bool isRunning = true, quitGame = false;
     int answer = 0;
+    Image winGame[61];
+    Image looseGame[58];
 
+    initWinGame(winGame);
+    initLooseGame(looseGame);
     generateRiddleImage(&riddle);
     displayRiddleImage(riddle, screen);
 
@@ -114,23 +153,20 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
                 break;
             }
 
-            if (answer == riddle.correctAnswer)
+            if (answer)
             {
-                strcpy(result.Texte, "Correct!");
-                initTxt(&result, Width / 2, Height / 2, white, 100, "./assets/fonts/Berlin Sans FB Demi Bold.ttf", result.Texte);
-                displayText(result, screen);
-                SDL_Flip(screen);
-                SDL_Delay(1000);
-                isRunning = false;
-            }
-            else if (answer != 0)
-            {
-                strcpy(result.Texte, "Wrong!");
-                initTxt(&result, Width / 2, Height / 2, white, 100, "./assets/fonts/Berlin Sans FB Demi Bold.ttf", result.Texte);
-                displayText(result, screen);
-                SDL_Flip(screen);
-                SDL_Delay(1000);
-                isRunning = false;
+                if (answer == riddle.correctAnswer)
+                {
+                    displayWinGame(winGame, screen);
+                    SDL_Delay(5000);
+                    isRunning = false;
+                }
+                else
+                {
+                    displayLooseGame(looseGame, screen);
+                    SDL_Delay(5000);
+                    isRunning = false;
+                }
             }
             break;
         }

@@ -1,8 +1,23 @@
+/**
+ * @file RiddleImage.h
+ * @author
+ * @brief Header file for RiddleImage.c
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #ifndef RiddleImage_h
 #define RiddleImage_h
 
 #include "MainFN.h"
 
+/**
+ * @struct RiddleImage
+ * @brief Image Riddle structure
+ *
+ */
 typedef struct RiddleImage
 {
     Image Backg;

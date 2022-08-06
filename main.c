@@ -1,3 +1,14 @@
+/**
+ * @file main.c
+ * @author
+ * @brief Main File
+ * @version 0.1
+ * @date 2022-08-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
@@ -15,9 +26,9 @@ SDL_Surface *screen;
 bool fullScreen = false;
 
 /**
- * @brief Setup Function
+ * @brief Configuring the SDL
  *
- * @return int Status (1 OK / 0 ERROR)
+ * @return int (1: Configured /0: Not Configured)
  */
 int setup()
 {
@@ -174,13 +185,14 @@ int main()
             switch (choice)
             {
             case 1:
-                isRunning = RiddleTextLoop(screen, &fullScreen);
+                isRunning = RiddleImageLoop(screen, &fullScreen);
                 break;
             case 2:
                 isRunning = gameLoop(screen, &fullScreen);
                 break;
             case 3:
-                isRunning = RiddleImageLoop(screen, &fullScreen);
+                isRunning = RiddleTextLoop(screen, &fullScreen);
+                ;
                 break;
             }
 
