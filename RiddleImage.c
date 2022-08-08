@@ -51,6 +51,7 @@ void generateRiddleImage(RiddleImage *riddle)
             randNum = generateRandomNumber(0, 2);
         } while (x[randNum] == 0 || y[randNum] == 0);
 
+
         initImage(&riddle->Answer[i], x[randNum], y[randNum], riddle->Answer[i].nameImg);
 
         if (i == (riddle->correctAnswer - 1) && !changed)
@@ -106,7 +107,6 @@ void freeRiddleImage(RiddleImage *riddle)
 bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
 {
     RiddleImage riddle;
-    Text result;
     SDL_Color white = {255, 255, 255};
     SDL_Event event;
     bool isRunning = true, quitGame = false;
@@ -116,6 +116,7 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
 
     initWinGame(winGame);
     initLooseGame(looseGame);
+
     generateRiddleImage(&riddle);
     displayRiddleImage(riddle, screen);
 
@@ -153,7 +154,7 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
                 break;
             }
 
-            if (answer)
+            if (answer != 0)
             {
                 if (answer == riddle.correctAnswer)
                 {

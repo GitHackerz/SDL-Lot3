@@ -21,7 +21,7 @@ typedef struct Game
 {
     Image Backg;
     Image X[3][3], O[3][3];
-    int isChecked[3][3];
+    int isChecked[3][3]; // 0- notChecked  1- Checked By Player  2- Checked by Computer
 } Game;
 
 void initGame(Game *game);
@@ -40,6 +40,6 @@ bool onRight(int j);
 bool Attack(Game *game, SDL_Surface *screen);
 bool Defense(Game *game, SDL_Surface *screen);
 void randomPlay(Game *game, SDL_Surface *screen);
-int PlayerWin(Game game);
+int PlayerWin(Game game); //0- NoOne Win  1- Player Win  2- Computer Win
 
 #endif /* MiniGame */

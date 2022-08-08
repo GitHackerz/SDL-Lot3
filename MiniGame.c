@@ -54,7 +54,6 @@ bool getPos(Game game, int x, int y, int *i, int *j)
     int posX1 = posX + 210, posY1 = posY + 210;
     for (int c = 0; c < 3; c++)
     {
-
         for (int k = 0; k < 3; k++)
         {
             if (x >= posX && x <= posX1 && y >= posY && y <= posY1)
@@ -113,7 +112,7 @@ void checkO(Game *game, SDL_Surface *screen, int i, int j)
  */
 bool onMiddleV(int i)
 {
-    if (i > 0 && i < 2)
+    if (i == 1)
         return true;
     return false;
 }
@@ -127,7 +126,7 @@ bool onMiddleV(int i)
  */
 bool onMiddleH(int j)
 {
-    if (j > 0 && j < 2)
+    if (j == 1)
         return true;
     return false;
 }
@@ -245,17 +244,6 @@ bool Attack(Game *game, SDL_Surface *screen)
         }
     }
 
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     for (int j = 0; j < 3; j++)
-    //     {
-    //         if (!game->isChecked[i][j])
-    //         {
-    //             checkO(game, screen, i, j);
-    //             return true;
-    //         }
-    //     }
-    // }
     return false;
 }
 
@@ -397,12 +385,12 @@ bool Deffense(Game *game, SDL_Surface *screen)
  */
 void randomPlay(Game *game, SDL_Surface *screen)
 {
-    int i = rand() % 3;
-    int j = rand() % 3;
+    int i = generateRandomNumber(0,2);
+    int j = generateRandomNumber(0,2);
     while (game->isChecked[i][j] != 0)
     {
-        i = rand() % 3;
-        j = rand() % 3;
+        i = generateRandomNumber(0,2);
+        j = generateRandomNumber(0,2);
     }
     checkO(game, screen, i, j);
 }
@@ -421,16 +409,18 @@ int playerWin(Game game)
             return 1;
         if (game.isChecked[i][0] == 1 && game.isChecked[i][1] == 1 && game.isChecked[i][2] == 1)
             return 1;
-        if (game.isChecked[0][0] == 1 && game.isChecked[1][1] == 1 && game.isChecked[2][2] == 1)
-            return 1;
+        
 
         if (game.isChecked[0][i] == 2 && game.isChecked[1][i] == 2 && game.isChecked[2][i] == 2)
             return 2;
         if (game.isChecked[i][0] == 2 && game.isChecked[i][1] == 2 && game.isChecked[i][2] == 2)
             return 2;
-        if (game.isChecked[0][0] == 2 && game.isChecked[1][1] == 2 && game.isChecked[2][2] == 2)
-            return 2;
+        
     }
+    if (game.isChecked[0][0] == 1 && game.isChecked[1][1] == 1 && game.isChecked[2][2] == 1)
+            return 1;
+    if (game.isChecked[0][0] == 2 && game.isChecked[1][1] == 2 && game.isChecked[2][2] == 2)
+        return 2;
     if (game.isChecked[0][2] == 1 && game.isChecked[1][1] == 1 && game.isChecked[2][0] == 1)
         return 1;
     if (game.isChecked[0][2] == 2 && game.isChecked[1][1] == 2 && game.isChecked[2][0] == 2)
@@ -490,7 +480,7 @@ bool gameLoop(SDL_Surface *screen, bool *fullScreen)
             int x = event.button.x;
             int y = event.button.y;
             int i, j;
-            if (getPos(game, x, y, &i, &j) && isMyTurn)
+            if (isMyTurn && getPos(game, x, y, &i, &j) )
             {
                 if (!game.isChecked[i][j])
                 {

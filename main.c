@@ -126,10 +126,9 @@ int main()
                         displayImage(menuBackg, screen);
                         displayImage(butClickActive[i], screen);
                         for (int j = 0; j < 3; j++)
-                        {
                             if (j != i)
                                 displayImage(butClick[j], screen);
-                        }
+                        
                         insideButton[i] = true;
                         SDL_Flip(screen);
                     }
@@ -192,7 +191,7 @@ int main()
                 break;
             case 3:
                 isRunning = RiddleTextLoop(screen, &fullScreen);
-                ;
+                
                 break;
             }
 

@@ -22,7 +22,8 @@ void generateRiddleText(RiddleText *riddle)
 
     int x[3], y[3];
     char Answ1[30], Answ2[30], Answ3[30];
-    int numRiddle = generateRandomNumber(1, 3);
+    int numRiddle = generateRandomNumber(1, 2);
+
     strcpy(riddle->Answer[0].Texte, "A- ");
     strcpy(riddle->Answer[1].Texte, "B- ");
     strcpy(riddle->Answer[2].Texte, "C- ");
@@ -39,7 +40,7 @@ void generateRiddleText(RiddleText *riddle)
     i = 0;
     do
     {
-        int randNum = generateRandomNumber(0, 3);
+        int randNum = generateRandomNumber(0, 2);
         if (strlen(riddle->Answer[randNum].Texte) <= 3)
         {
             switch (i)
@@ -81,10 +82,8 @@ void displayRiddleText(RiddleText riddle, SDL_Surface *screen)
     displayImage(riddle.Backg, screen);
 
     for (int i = 0; i < 3; i++)
-    {
         displayText(riddle.Answer[i], screen);
-    }
-
+    
     SDL_Flip(screen);
 }
 
@@ -97,9 +96,7 @@ void freeRiddleText(RiddleText *riddle)
 {
     freeImage(riddle->Backg);
     for (int i = 0; i < 3; i++)
-    {
         freeText(riddle->Answer[i]);
-    }
 }
 
 /**
