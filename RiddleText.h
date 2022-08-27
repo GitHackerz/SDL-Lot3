@@ -23,6 +23,8 @@ typedef struct RiddleText
     Text Answer[3];
     int correctAnswer;
     Image Backg;
+    int duration;
+    bool isTimeOut;
 } RiddleText;
 
 void generateRiddle(RiddleText *riddle);

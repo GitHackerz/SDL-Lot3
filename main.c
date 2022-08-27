@@ -1,6 +1,6 @@
 /**
  * @file main.c
- * @author Hamza 
+ * @author Hamza
  * @brief Main File
  * @version 0.1
  * @date 2022-08-05
@@ -8,7 +8,6 @@
  * @copyright Copyright (c) 2022
  *
  */
-
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
@@ -128,7 +127,7 @@ int main()
                         for (int j = 0; j < 3; j++)
                             if (j != i)
                                 displayImage(butClick[j], screen);
-                        
+
                         insideButton[i] = true;
                         SDL_Flip(screen);
                     }
@@ -179,7 +178,7 @@ int main()
             break;
         }
 
-        if (choice != 0)
+        if (choice > 0 && choice < 4)
         {
             switch (choice)
             {
@@ -191,7 +190,6 @@ int main()
                 break;
             case 3:
                 isRunning = RiddleTextLoop(screen, &fullScreen);
-                
                 break;
             }
 

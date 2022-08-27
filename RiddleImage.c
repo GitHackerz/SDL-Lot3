@@ -23,6 +23,9 @@ void generateRiddleImage(RiddleImage *riddle)
     char nameImg1[30], nameImg2[30], nameImg3[30], cityName1[30], cityName2[30], cityName3[30];
     int x[3], y[3];
 
+    riddle->duration = 30;
+    riddle->isTimeOut = false;
+
     riddle->correctAnswer = generateRandomNumber(1, 3);
     fscanf(imageRiddleFile, "%s %s %s %s %s %s %s (%d,%d) (%d,%d) (%d,%d)", riddle->Backg.nameImg, riddle->Answer[0].nameImg, riddle->Answer[1].nameImg, riddle->Answer[2].nameImg, cityName1, cityName2, cityName3, &x[0], &y[0], &x[1], &y[1], &x[2], &y[2]);
 
@@ -50,7 +53,6 @@ void generateRiddleImage(RiddleImage *riddle)
         {
             randNum = generateRandomNumber(0, 2);
         } while (x[randNum] == 0 || y[randNum] == 0);
-
 
         initImage(&riddle->Answer[i], x[randNum], y[randNum], riddle->Answer[i].nameImg);
 
@@ -107,22 +109,49 @@ void freeRiddleImage(RiddleImage *riddle)
 bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
 {
     RiddleImage riddle;
-    SDL_Color white = {255, 255, 255};
+    SDL_Color timerTextColor, white = {255, 255, 255}, yellow = {199, 138, 21}, red = {192, 10, 10};
     SDL_Event event;
     bool isRunning = true, quitGame = false;
     int answer = 0;
     Image winGame[61];
     Image looseGame[58];
-
+    Text timerText;
+    char fullTimerText[10];
     initWinGame(winGame);
     initLooseGame(looseGame);
 
     generateRiddleImage(&riddle);
     displayRiddleImage(riddle, screen);
 
+    int gameTimeInit = SDL_GetTicks();
+    int gameTimeSec = 0, gameTimePred = -1;
     while (isRunning)
     {
-        SDL_WaitEvent(&event);
+        gameTimeSec = ((SDL_GetTicks() - gameTimeInit) / 1000) % 60;
+        if (gameTimePred != gameTimeSec)
+        {
+            if (gameTimeSec > riddle.duration - 10)
+                timerTextColor = red;
+            else
+                timerTextColor = yellow;
+
+            sprintf(fullTimerText, "00:%02d", (riddle.duration - gameTimeSec));
+            initTxt(&timerText, 1766, 20, timerTextColor, 50, "./assets/fonts/Berlin Sans FB Demi Bold.ttf", fullTimerText);
+            displayRiddleImage(riddle, screen);
+            displayText(timerText, screen);
+            SDL_Flip(screen);
+        }
+
+        if (gameTimeSec >= riddle.duration)
+        {
+            riddle.isTimeOut = true;
+            isRunning = false;
+            displayLooseGame(looseGame, screen);
+            SDL_Delay(5000);
+            isRunning = false;
+        }
+
+        SDL_PollEvent(&event);
         switch (event.type)
         {
         case SDL_QUIT:
@@ -171,6 +200,7 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
             }
             break;
         }
+        gameTimePred = gameTimeSec;
     }
     freeRiddleImage(&riddle);
     freeWinGame(winGame);

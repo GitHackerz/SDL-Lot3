@@ -24,6 +24,9 @@ void generateRiddleText(RiddleText *riddle)
     char Answ1[30], Answ2[30], Answ3[30];
     int numRiddle = generateRandomNumber(1, 2);
 
+    riddle->duration = 30;
+    riddle->isTimeOut = false;
+
     strcpy(riddle->Answer[0].Texte, "A- ");
     strcpy(riddle->Answer[1].Texte, "B- ");
     strcpy(riddle->Answer[2].Texte, "C- ");
@@ -83,7 +86,7 @@ void displayRiddleText(RiddleText riddle, SDL_Surface *screen)
 
     for (int i = 0; i < 3; i++)
         displayText(riddle.Answer[i], screen);
-    
+
     SDL_Flip(screen);
 }
 
@@ -114,19 +117,48 @@ bool RiddleTextLoop(SDL_Surface *screen, bool *fullScreen)
     Image winGame[61];
     Image looseGame[58];
     Text result;
-    SDL_Color white = {255, 255, 255};
+    SDL_Color timerTextColor, white = {255, 255, 255}, yellow = {199, 138, 21}, red = {192, 10, 10};
     SDL_Event event;
     bool isRunning = true, quitGame = false;
     int answer = 0;
+    Text timerText;
+    char fullTimerText[10];
 
     initWinGame(winGame);
     initLooseGame(looseGame);
     generateRiddleText(&riddle);
     displayRiddleText(riddle, screen);
 
+    int gameTimeInit = SDL_GetTicks();
+    int gameTimeSec = 0, gameTimePred = -1;
+
     while (isRunning)
     {
-        SDL_WaitEvent(&event);
+        gameTimeSec = ((SDL_GetTicks() - gameTimeInit) / 1000) % 60;
+        if (gameTimePred != gameTimeSec)
+        {
+            if (gameTimeSec > riddle.duration - 10)
+                timerTextColor = red;
+            else
+                timerTextColor = yellow;
+
+            sprintf(fullTimerText, "00:%02d", (riddle.duration - gameTimeSec));
+            initTxt(&timerText, 1766, 20, timerTextColor, 50, "./assets/fonts/Berlin Sans FB Demi Bold.ttf", fullTimerText);
+            displayRiddleText(riddle, screen);
+            displayText(timerText, screen);
+            SDL_Flip(screen);
+        }
+
+        if (gameTimeSec >= riddle.duration)
+        {
+            riddle.isTimeOut = true;
+            isRunning = false;
+            displayLooseGame(looseGame, screen);
+            SDL_Delay(5000);
+            isRunning = false;
+        }
+
+        SDL_PollEvent(&event);
         switch (event.type)
         {
         case SDL_QUIT:
@@ -175,6 +207,7 @@ bool RiddleTextLoop(SDL_Surface *screen, bool *fullScreen)
             }
             break;
         }
+        gameTimePred = gameTimeSec;
     }
     freeRiddleText(&riddle);
     freeWinGame(winGame);

@@ -48,9 +48,9 @@ void displayWinGame(Image winGame[], SDL_Surface *screen)
         SDL_Flip(screen);
     }
 }
-void freeWinGame(Image winGame[] )
+void freeWinGame(Image winGame[])
 {
-    for(int i=0;i<61;i++)
+    for (int i = 0; i < 61; i++)
     {
         freeImage(winGame[i]);
     }
@@ -83,9 +83,9 @@ void displayLooseGame(Image looseGame[], SDL_Surface *screen)
     }
 }
 
-void freeLooseGame(Image looseGame[] )
+void freeLooseGame(Image looseGame[])
 {
-    for(int i=0;i<58;i++)
+    for (int i = 0; i < 58; i++)
     {
         freeImage(looseGame[i]);
     }

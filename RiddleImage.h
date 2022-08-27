@@ -25,6 +25,8 @@ typedef struct RiddleImage
     Image Answer[3];
     int correctAnswer;
     Text cityName;
+    int duration;
+    bool isTimeOut;
 } RiddleImage;
 
 void generateRiddleImage(RiddleImage *riddle);
