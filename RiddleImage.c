@@ -140,6 +140,10 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
             displayRiddleImage(riddle, screen);
             displayText(timerText, screen);
             SDL_Flip(screen);
+
+            printf("%d %d\n", gameTimePred, gameTimeSec);
+
+            gameTimePred = gameTimeSec;
         }
 
         if (gameTimeSec >= riddle.duration)
@@ -200,7 +204,7 @@ bool RiddleImageLoop(SDL_Surface *screen, bool *fullScreen)
             }
             break;
         }
-        gameTimePred = gameTimeSec;
+        
     }
     freeRiddleImage(&riddle);
     freeWinGame(winGame);
